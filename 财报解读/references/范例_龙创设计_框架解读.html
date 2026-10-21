@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>龙创设计(832954.NQ) · 七层框架财务解读</title>
+<style>
+  :root{--ink:#1a2332;--sub:#5b6b7f;--line:#e3e8ef;--bg:#f6f8fa;--blue:#1f4e79;
+        --bad:#c0392b;--good:#1e8449;--warn:#b9770e;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px;padding-bottom:70px}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  header{background:linear-gradient(135deg,#1f4e79,#2e6da4);color:#fff;padding:40px 24px 32px}
+  header .wrap{padding:0}
+  header h1{font-size:24px;margin-bottom:8px}
+  header p{opacity:.92;font-size:13.5px}
+  .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:1px 9px;font-size:12px;margin:2px 6px 2px 0}
+  h2{font-size:19px;color:var(--blue);margin:40px 0 4px;padding-left:12px;border-left:5px solid var(--blue)}
+  h2 .tag{font-size:12px;color:var(--sub);font-weight:400;margin-left:10px}
+  h3{font-size:15.5px;margin:18px 0 6px}
+  .lead{color:var(--sub);font-size:13.5px;margin-bottom:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:14px 0;box-shadow:0 1px 3px rgba(20,40,70,.05)}
+  .tldr{background:#fff;border:1px solid var(--line);border-left:6px solid var(--good);border-radius:10px;padding:22px 26px;margin:24px 0}
+  .tldr h3{color:var(--good);margin-bottom:8px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .kpi .t{font-size:12px;color:var(--sub)}
+  .kpi .v{font-size:19px;font-weight:700;margin:3px 0 1px}
+  .kpi .s{font-size:11.5px;color:var(--sub)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;background:#fff}
+  th{background:#1f4e79;color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+  td{border:1px solid var(--line);padding:6px 9px;vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfd}
+  .bad{color:var(--bad);font-weight:700}.good{color:var(--good);font-weight:700}.warn{color:var(--warn);font-weight:700}
+  .verdict{display:inline-block;border-radius:4px;padding:2px 10px;font-weight:700;font-size:13px}
+  .v-good{background:#e8f6ee;color:var(--good);border:1px solid #bfe3cd}
+  .v-warn{background:#fdf6e7;color:var(--warn);border:1px solid #ecd9a8}
+  .v-bad{background:#fdecea;color:var(--bad);border:1px solid #f0c3bc}
+  .q{background:#f2f7ff;border-left:4px solid var(--blue);padding:9px 15px;margin:10px 0;font-size:13.5px;border-radius:0 6px 6px 0}
+  .flag{background:#fdecea;border:1px solid #f0c3bc;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px}
+  .flagw{background:#fdf6e7;border:1px solid #ecd9a8;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px}
+  .muted{color:var(--sub);font-size:12.5px}
+  ul.tight{margin:6px 0 6px 22px}ul.tight li{margin:4px 0}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--sub);font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>龙创设计（832954.NQ）· 财务解读报告</h1>
+    <p>解读框架：《财务报表分析与股票估值》七层融合框架 v1.0 ｜ 数据源：<b>Wind 金融数据（新三板 832954.NQ）</b> ｜ 指标计算：按框架方法论手动复算（finmodel 引擎不含新三板数据通道，口径差异已逐项标注）｜ 单位：亿元人民币 ｜ 数据截至：2025 年年报 + 2026 年半年报（2026-06-30）｜ 生成日期：2026-10-10</p>
+    <div style="margin-top:10px">
+      <span class="badge">主营：整车研发"交钥匙"设计 + 零部件/KD 件出口（项目整包占 80.6%）</span>
+      <span class="badge">上市板：三板（创新层）</span>
+      <span class="badge">股权资金成本假设 10%</span>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+
+<!-- ============ 首屏结论 ============ -->
+<div class="tldr">
+  <h3>一句话结论</h3>
+  <p><b>龙创设计是三份框架解读中财务质量最高的一家：主业纯度极高（金融资产收益为负、非经常性损益仅占 8.8%）、ROIC 14.0% 显著高于 10% 股权成本、EVA 由负转正至 +0.56 亿、FCF 3.58 亿（净利润的 2.45 倍）、2025 年现金流风格升级为最健康的"明星型"——价值创造者的身份是被数字确认的。但必须点破两件事：① ROE 从 9.1% 跃升至 16.1%，五因素中最大的边际贡献者是<b>财务杠杆（×1.346）</b>而非利润率或周转，且财务成本效应已由"增厚"转为"侵蚀"（×0.928），2026H1 进一步恶化到 0.772（财务费用因汇兑损失从 2025 年全年 1089 万飙升至 3492 万）；② 它在新三板，框架 L6 得出的价值结论<b>无法通过二级市场定价兑现</b>——这不是财务问题，是载体问题。</b></p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="t">2025 营业收入</div><div class="v">14.36 亿</div><div class="s">+66.5%（2026H1 +92.8%）</div></div>
+  <div class="kpi"><div class="t">2025 归母净利润</div><div class="v">1.46 亿</div><div class="s">+95.0%</div></div>
+  <div class="kpi"><div class="t">息前税后经营利润</div><div class="v">1.59 亿</div><div class="s">主业真实盈利（+108%）</div></div>
+  <div class="kpi"><div class="t">2025 经营现金流</div><div class="v">4.65 亿</div><div class="s">净现比 3.18，销售收现比 121.5%</div></div>
+  <div class="kpi"><div class="t">ROE / ROIC</div><div class="v good">16.14% / 14.02%</div><div class="s">均高于 10% 股权成本</div></div>
+  <div class="kpi"><div class="t">EVA</div><div class="v good">+0.56 亿</div><div class="s">由负转正（2024 -0.07 亿）</div></div>
+  <div class="kpi"><div class="t">有息负债率 / 净债务</div><div class="v">20.0% / -4.44 亿</div><div class="s">净现金状态</div></div>
+  <div class="kpi"><div class="t">现金流风格</div><div class="v">明星型 (+--)</div><div class="s">2025 年，2026H1 转蛮牛型</div></div>
+</div>
+
+<!-- ============ L0 ============ -->
+<h2>L0 · 财报质量门禁 <span class="tag">结论：通过 ── 主业纯度与现金含量俱佳，仅信用减值扩大与收入确认估计性需跟踪</span></h2>
+<div class="card">
+<table>
+  <tr><th>门禁检查</th><th>数值</th><th>判定</th></tr>
+  <tr><td>审计意见</td><td>2023 年报：立信会计师事务所标准无保留意见（信会师报字[2024]第 ZF10682 号，审计报酬 60 万）</td><td><span class="verdict v-good">🟢 通过</span> <span class="muted">2024/2025 年报审计意见未在本次取数范围内，需核验</span></td></tr>
+  <tr><td>关键审计事项</td><td><b>收入确认</b>被列为 2023 年关键审计事项（项目承包按完工进度/里程碑确认收入）</td><td><span class="verdict v-warn">🟡 关注</span> <span class="muted">设计承包业务的收入依赖完工百分比估计，是天然的利润调节空间；且公司在审 IPO 期间被反复问询，此点应作为长期跟踪项</span></td></tr>
+  <tr><td>非经常性损益 / 净利润</td><td>2025 年 8.8%（1279 万）；2026H1 仅 2.6%（257 万）</td><td><span class="verdict v-good">🟢 通过</span> <span class="muted">远低于 10% 阈值，无补助/卖资产撑利润痕迹</span></td></tr>
+  <tr><td>净利润 vs 经营现金流</td><td>净现比 2023 1.12 / 2024 3.66 / 2025 3.18 / 2026H1 1.36</td><td><span class="verdict v-good">🟢 通过</span> <span class="muted">连续多年 &gt;1，无"纸面利润"迹象</span></td></tr>
+  <tr><td>销售收现比</td><td>2024 116.5% → 2025 121.5% → 2026H1 132.9%</td><td><span class="verdict v-good">🟢 持续提升</span> <span class="muted">收入有真实现金回流且在改善</span></td></tr>
+  <tr><td>减值行为</td><td>2024：资产减值 836 万 + 信用减值 2311 万；2025：资产减值 1146 万 + <b>信用减值 3018 万</b>（+30.6%）</td><td><span class="verdict v-warn">🟡 关注</span> <span class="muted">信用减值连续两年在 2000-3000 万量级并扩大，与应收账款快速膨胀同步，需查账龄结构</span></td></tr>
+  <tr><td>业务逻辑合理性</td><td>毛利率 39.32%→35.33%→33.84% 连续下行，但周转率与净利率同向改善</td><td><span class="verdict v-warn">🟡 关注</span> <span class="muted">毛利率下行可由业务结构（承包+供应链出口占比升）解释，暂不构成"无法解释的跳变"</span></td></tr>
+</table>
+<p class="muted">门禁说明：报表勾稽自洽、利润有现金支撑、非经常项干净，<b>准予采信</b>。唯一实质警示是"收入确认依赖完工进度估计"这一设计承包业的固有特征——它不会让报表变得不可信，但意味着收入的时点分布存在管理空间，因此后续各层对"增长率"的解读都应保留一档谨慎。</p>
+</div>
+
+<!-- ============ L1 ============ -->
+<h2>L1 · 战略识别与财报匹配 <span class="tag">结论：差异化色彩在淡化 ── 报表画像正从"技术设计公司"漂移向"项目承包交付商"</span></h2>
+<div class="card">
+<table>
+  <tr><th>画像维度</th><th>2024</th><th>2025</th><th>2026H1</th><th>指向</th></tr>
+  <tr><td>毛利率</td><td>39.32%</td><td>35.33%</td><td>33.84%</td><td>中高毛利但<b class="warn">连续下行</b> → 差异化溢价被摊薄</td></tr>
+  <tr><td>销售费用率</td><td>3.62%</td><td>4.00%</td><td>3.16%</td><td>低且稳定 → 不靠营销驱动</td></tr>
+  <tr><td>管理费用率</td><td>14.46%</td><td>10.70%</td><td>10.39%</td><td><b class="good">显著下降</b> → 规模效应释放</td></tr>
+  <tr><td>研发费用率</td><td>7.65%</td><td><b class="warn">4.42%</b></td><td>3.77%</td><td>🟡 差异化战略的核心投入被稀释（绝对额 6597 万→6348 万，反而微降）</td></tr>
+  <tr><td>财务费用率</td><td>-1.25%（净收益）</td><td>0.76%</td><td><b class="bad">3.34%</b></td><td>由财务净收益转为显著支出（汇兑）</td></tr>
+  <tr><td>长期经营资产占比</td><td>27.2%</td><td>27.7%</td><td>24.1%</td><td>轻资产底色（无商誉，无重资产包袱）</td></tr>
+  <tr><td>营运资本（净）</td><td>+0.42 亿</td><td><b class="good">-2.63 亿</b></td><td><b class="good">-2.90 亿</b></td><td>负营运资本 → 用客户的钱做生意</td></tr>
+  <tr><td>合同负债</td><td>1.26 亿</td><td><b>4.02 亿</b></td><td>4.54 亿</td><td>客户预付款丰厚 → 议价力与订单前瞻</td></tr>
+</table>
+<div class="q"><b>人效验证（设计公司看人效，这是本框架对服务业的关键补充）：</b>2024 年营收 8.63 亿 / 员工约 2645 人 = <b>32.6 万元/人</b>；2025 年营收 14.36 亿 / 员工约 3396 人 = <b>42.3 万元/人</b>，<b class="good">同比 +30%</b>。同期"支付给职工的现金"占营收比重由 54.9% 降至 43.8%——<b>这是 2025 年利润爆发的真正底层原因：人均产出提升而非单纯接单量堆砌。</b></div>
+<p>战略自洽性判定：<span class="verdict v-warn">部分自洽</span>　公司宣称依托"国家级工业设计中心"做差异化整车研发，报表上确实呈现轻资产、高人均产出、客户预付占款强的技术服务特征（<b>符合差异化画像</b>）；但毛利率 5 年下移、研发费率腰斩（7.65%→3.77%）与其"技术驱动"的自我定位产生张力——<b>报表反映的真实战略，更接近"以中国供应链成本优势承接海外整包项目"，即差异化外壳下的成本领先内核</b>。这不是坏事，但决定了它必须靠订单量与周转赚钱，而非靠技术溢价。</p>
+</div>
+
+<!-- ============ L2 ============ -->
+<h2>L2 · 资产资本表解读 <span class="tag">结论：结构稳健 ── 负营运资本 + 净现金 4.44 亿 + 无短债长投，资产负债率 54.9% 是无息占款撑起来的</span></h2>
+<div class="card">
+<h3>钱投在哪（2025 年末，资产总额 20.07 亿）</h3>
+<table>
+  <tr><th>构成</th><th>金额 / 占比</th><th>解读</th></tr>
+  <tr><td>金融资产（货币资金为主）</td><td>6.70 亿 / 33.4%</td><td>现金占比三分之一，偏厚；对应"储备 vs 找不投主业机会"的追问——公司正投金山基地（在建 1.73 亿），属过渡态</td></tr>
+  <tr><td>营运资本（净）</td><td><b class="good">-2.63 亿</b></td><td>营运资产 5.90 亿 &lt; 营运负债 8.53 亿，<b>做生意用的是客户和供应商的钱</b>（2024 尚为 +0.42 亿，一年完成模式切换）</td></tr>
+  <tr><td>长期经营资产</td><td>5.55 亿 / 27.7%</td><td>= 固定资产 3.28 + 在建 1.73 + 无形 0.50 + 长期待摊 0.04；无商誉，无减值地雷</td></tr>
+  <tr><td>长期股权投资</td><td>0.50 亿 / 2.5%</td><td>对联营企业投资，<b>2025 年贡献投资收益 -1183 万</b>（亏损），是拖累项</td></tr>
+  <tr><td>合同资产</td><td>0.70 亿</td><td>已完工未结算的设计款，与收入确认节奏相关</td></tr>
+</table>
+<h3>钱从哪来（2025 年末）</h3>
+<table>
+  <tr><th>指标</th><th>数值</th><th>判定</th></tr>
+  <tr><td>有息负债</td><td>2.26 亿（短借 1.05 + 一年内到期 0.25 + 长借 0.89 + 租赁 0.07）</td><td><span class="verdict v-good">🟢 规模可控</span></td></tr>
+  <tr><td>有息负债率（有息 / 有息+权益）</td><td>20.0%（2024 21.0%）</td><td><span class="verdict v-good">🟢 健康</span></td></tr>
+  <tr><td>净债务（有息 − 货币资金）</td><td><b class="good">-4.44 亿</b></td><td><span class="verdict v-good">🟢 净现金</span>（2026H1 进一步至 -4.61 亿）</td></tr>
+  <tr><td>资产负债率（报表口径）</td><td>54.89%（2026H1 58.63%）</td><td><span class="verdict v-warn">🟡 看似高</span> <span class="muted">主体是<b>合同负债 4.02 亿（客户预付）+ 应付账款 3.08 亿</b>等无息占款，有息仅 2.26 亿——有息负债率比资产负债率更能反映真实压力</span></td></tr>
+  <tr><td>财务杠杆（有息 / 权益）</td><td>0.25 倍</td><td>有息杠杆极低</td></tr>
+  <tr><td>长期融资净额</td><td><b class="good">+6.59 亿</b></td><td><span class="verdict v-good">🟢 无短债长投</span>（长期资金远超长期资产占用）</td></tr>
+  <tr><td>营运资本长期化率</td><td>分母为负 → 指标失真</td><td><span class="muted">⚪ 同博力威情形：营运资本为负时该比率失去判读意义，实质风险改看"占款模式可持续性"（见 L5）</span></td></tr>
+</table>
+<p>小结：<b>这是一张"看起来负债 55%、实际净现金 4.44 亿"的报表。</b>资产端是"现金 33% + 人力型轻资产"，资本端靠客户预付款（合同负债）与供应商账期驱动，有息杠杆 0.25 倍且期限结构健康。<b>结构上唯一值得追问的是：货币资金 6.70 亿占资产三分之一、同时账上有长短期借款 2.26 亿——存贷双高的低效配置，随着金山基地投入（在建工程一年增 3 倍）会自然化解。</b></p>
+</div>
+
+<!-- ============ L3 ============ -->
+<h2>L3 · 股权价值增加表解读 <span class="tag">结论：主业真实盈利 +108%，利润纯度是三家最高 ── 金融活动在拖累而非贡献</span></h2>
+<div class="card">
+<table>
+  <tr><th>层级</th><th>2024</th><th>2025</th><th>2026H1</th><th>解读</th></tr>
+  <tr><td>营业收入</td><td>8.63</td><td><b>14.36（+66.5%）</b></td><td>10.46（+92.8%）</td><td>项目整包 +107%、零部件及改制车 +99.7% 双引擎</td></tr>
+  <tr><td>阶段利润1（收入−成本−销售−税金）</td><td>3.02</td><td><b>4.43（历史新高）</b></td><td>3.17</td><td>产品/服务本身的赚钱效应大幅扩张</td></tr>
+  <tr><td>阶段利润2</td><td>1.46</td><td><b>2.48</b></td><td>2.00</td><td>管理费用 + 减值合计吃掉约 1.95 亿</td></tr>
+  <tr><td><b>息税前经营利润（主业锚）</b></td><td>0.86</td><td><b>1.81（+109%）</b></td><td>1.46</td><td>🟢 主业真实盈利能力翻倍</td></tr>
+  <tr><td>息前税后经营利润</td><td>0.76</td><td><b>1.59</b></td><td>1.25</td><td>实际税率 12.4%，税后主业利润</td></tr>
+  <tr><td>息税前金融资产收益</td><td>-0.11</td><td><b class="good">-0.03</b></td><td>+0.02</td><td>🟢 <b>金融活动为负贡献</b>（联营企业亏损 + 利息净支出），意味着利润<b>不靠理财/炒股</b></td></tr>
+  <tr><td>经营利润占比</td><td>&gt;100%</td><td><b class="good">&gt;100%</b></td><td>&gt;100%</td><td>🟢 主业贡献超过 100%，金融收益拉后腿</td></tr>
+  <tr><td>净利润 / 归母 / 扣非</td><td>0.76 / 0.75 / 0.59</td><td>1.46 / 1.46 / <b>1.33</b></td><td>0.97 / 0.97 / 0.94</td><td>扣非增速（2025 +123.8%）快于归母，质量优</td></tr>
+</table>
+<p>本层结论句式：2025 年净利润 1.46 亿中，息前税后经营利润 1.59 亿——<b>主业不仅覆盖全部利润，还超额承担了金融板块（联营亏损 -1183 万）的拖累；非经常性损益占比仅 8.8%，少数股东权益已在 2025 年清零（归母 = 净利润）。这是三份框架解读中利润纯度最高的一份，给这家公司定价应直接使用账面净利润（含全部主业属性），无需剔除金融收益。</b></p>
+<div class="q"><b>与本框架既往案例的对照（重要）：</b>博力威 2025 年息前税后金融收益贡献 NOPLAT 的 <b>34.9%</b>、非经常项占净利润 26.4%，需打折定价；龙创设计这两项分别是<b>负贡献</b>与 <b>8.8%</b>，属"干净利润"。<b>同一条 L3 检查线上，两家公司得分差距显著。</b></div>
+</div>
+
+<!-- ============ L4 ============ -->
+<h2>L4 · ROE 五因素归因 <span class="tag">结论：A+B 混合 ── 利润率与周转的改善是真的，但杠杆才是最大边际贡献者，且财务成本已由助力转为阻力</span></h2>
+<div class="card">
+<h3>五因素分解（ROE = ①×②×③×④×⑤，连乘结果与"净利润/股东权益"完全吻合，口径自洽）</h3>
+<table>
+  <tr><th>因子</th><th>2024</th><th>2025</th><th>2026H1</th><th>倍数变化<br>(25/24)</th><th>归因</th></tr>
+  <tr><td>① 息税前经营利润率</td><td>10.01%</td><td>12.60%</td><td><b>13.95%</b></td><td class="good">×1.259</td><td><b class="good">主业变强（定价/成本管控改善）</b></td></tr>
+  <tr><td>② 资产周转率</td><td>0.633</td><td>0.716</td><td>0.455*</td><td class="good">×1.131</td><td><b class="good">同样的资产挤出更多收入</b></td></tr>
+  <tr><td>③ 财务成本效应</td><td>0.993</td><td>0.921</td><td><b class="bad">0.772</b></td><td class="bad">×0.928</td><td><b class="bad">利息/汇兑侵蚀加剧 —— 唯一的负贡献因子</b></td></tr>
+  <tr><td>④ 财务杠杆倍数</td><td>1.647</td><td><b>2.217</b></td><td>2.417</td><td class="warn">×1.346</td><td><b class="warn">最大单项边际贡献 —— 加杠杆驱动</b></td></tr>
+  <tr><td>⑤ 所得税效应</td><td>0.883</td><td>0.876</td><td>0.860</td><td>×0.992</td><td>基本中性（实际税率 11.7%→12.4%，无税收红利）</td></tr>
+  <tr><td><b>ROE（五因子连乘）</b></td><td><b>9.14%</b></td><td><b class="good">16.14%</b></td><td><b>10.18%*</b></td><td>×1.766</td><td>2025 年 ROE 提升 76%</td></tr>
+</table>
+<p class="muted">* 2026H1 为半年未年化口径，②③⑤不可与年度直接比较，此处列出以观察<b>方向</b>：①继续上行（13.95%）、③继续恶化（0.772）、④继续上升（2.417）。</p>
+
+<h3>贡献排序与归因判定</h3>
+<div class="q">2025 年 ROE 从 9.14% 提升至 16.14%（×1.766），五个因子的贡献倍数排序为：<br>
+<b>④ 杠杆 ×1.346 ＞ ① 利润率 ×1.259 ＞ ② 周转 ×1.131 ＞ ⑤ 税负 ×0.992 ＞ ③ 财务成本 ×0.928</b><br>
+→ 归因类型：<span class="verdict v-warn">A+B 混合，但杠杆是最大边际贡献者</span>　主业改善（①②合计 ×1.42）确实存在且量级不小，但<b>单看任何一个因子，杠杆（×1.346）都排在第一位</b>，且③是唯一在拖后腿的因子。按本框架纪律，B 类倾向必须附带下述杠杆检验。</div>
+
+<h3>杠杆是否创造价值（框架强制检验项）</h3>
+<table>
+  <tr><th>检验项</th><th>2024</th><th>2025</th><th>判定</th></tr>
+  <tr><td>ROIC（息前税后经营利润 / (有息负债+股东权益)）</td><td>7.28%</td><td><b>14.02%</b></td><td><span class="verdict v-good">🟢 大幅改善</span></td></tr>
+  <tr><td>税后债务成本</td><td>约 1.37%</td><td>约 2.40%</td><td><span class="verdict v-warn">🟠 偏低，需核验</span></td></tr>
+  <tr><td><b>ROIC − 税后债务成本</b></td><td>+5.9pct</td><td><b class="good">+11.6pct</b></td><td><span class="verdict v-good">🟢 杠杆在创造价值</span>（远超 +3pct 健康线）</td></tr>
+  <tr><td>核心 ROIC（纯主业口径）</td><td>—</td><td>受负营运资本影响失真，不可用</td><td><span class="muted">⚪ 负营运资本使"核心生意资产"分母过小，该指标失真（与博力威同类问题）</span></td></tr>
+</table>
+<div class="flagw"><b>⚠️ 关于债务成本 2.40% 的口径警示（必须点破）：</b>2025 年利息费用仅 611 万，对应有息负债 2.26 亿，隐含利率约 2.7%，显著低于同期市场贷款利率。可能原因：① 部分利息被<b>资本化</b>进入在建工程（金山基地 2024-2026 建设期，在建工程从 426 万增至 1.81 亿）；② 存在政策性/贴息贷款。若属前者，则真实的利息负担被低估、ROIC 与债务成本的可比性下降。<b>该数字应视为估算而非精确值，本报告的"杠杆创造价值"结论对利率假设不敏感（14% vs 2.4% 的差距过大），但对"杠杆成本是否被完整计量"这一问题保持开放。</b></div>
+</div>
+
+<!-- ============ L5 ============ -->
+<h2>L5 · 现金流三表验证 <span class="tag">结论：明星型现金流成立 ── CFO 高增主要来自占款模式切换（营运资本 +0.42 → −2.63 亿），而非单纯利润；筹资已转为净流出</span></h2>
+<div class="card">
+<h3>① 经营现金流 → 利润含金量</h3>
+<table>
+  <tr><th>指标</th><th>2024</th><th>2025</th><th>2026H1</th><th>判定</th></tr>
+  <tr><td>经营活动现金流净额</td><td>2.77 亿</td><td><b>4.65 亿（+67.6%）</b></td><td>1.32 亿（−16.5%）</td><td>—</td></tr>
+  <tr><td>净现比（CFO / 净利润）</td><td>3.66</td><td>3.18</td><td>1.36</td><td><span class="verdict v-good">🟢 账面利润有超额现金支撑</span></td></tr>
+  <tr><td>销售收现比</td><td>116.5%</td><td>121.5%</td><td><b>132.9%</b></td><td><span class="verdict v-good">🟢 持续改善</span></td></tr>
+  <tr><td>追加营运资本（营运资本变动）</td><td>—</td><td><b class="good">-3.05 亿</b></td><td>-0.27 亿</td><td><span class="verdict v-warn">🟡 CFO 高增的重要来源是"多占了 3.05 亿"</span>——主要来自合同负债从 1.26 亿增至 4.02 亿（客户预付）</td></tr>
+</table>
+<h3>② 投资现金流 → 战略落地验证</h3>
+<table>
+  <tr><th>指标</th><th>2024</th><th>2025</th><th>2026H1</th><th>解读</th></tr>
+  <tr><td>购建长期资产支付的现金</td><td>2.23 亿</td><td>1.07 亿</td><td>0.37 亿</td><td>当期支出在收缩</td></tr>
+  <tr><td>在建工程余额</td><td>0.04 亿</td><td><b>1.73 亿</b></td><td>1.81 亿</td><td>⚠️ <b>资本开支并未停止，而是"在建化"了</b>——金山纯电智能汽车平台基地（总投资 3 亿+，预计 2026 建成）</td></tr>
+  <tr><td>投资活动现金流净额</td><td>-2.21 亿</td><td>-1.04 亿</td><td>-0.35 亿</td><td>持续净流出，方向聚焦主业产能/平台，<b>无跨界并购、无大额理财</b></td></tr>
+</table>
+<p class="muted">战略落地判定：<span class="verdict v-good">🟢 投资方向与宣称战略一致</span>　钱投向了自建研发平台（EMC 实验室、耐久振动实验室、试制车间），属于"研发能力资本化"，与"整车设计交钥匙 + 出海"主线吻合，未出现本框架警惕的"理财类大额流出"（说明主业有钱可投）。<b>需跟踪：2026 年该基地建成转固后，折旧摊销将推高固定成本，对净利率形成压力。</b></p>
+<h3>③ 筹资现金流 → 资本管理</h3>
+<table>
+  <tr><th>维度</th><th>2024</th><th>2025</th><th>判定</th></tr>
+  <tr><td>投资需求 vs 现金自给率</td><td>投资净流出 2.21 亿，CFO 2.77 亿，自给率 100%</td><td>投资净流出 1.04 亿，CFO 4.65 亿，<b>自给率 100%</b></td><td><span class="verdict v-good">🟢 完全自我造血</span></td></tr>
+  <tr><td>融资行为</td><td>取得借款 2.20 亿 / 偿还 1.10 亿 → 净流入 0.56 亿</td><td>取得借款 1.30 亿 / 偿还 1.26 亿 → <b class="good">净流出 0.80 亿</b></td><td><span class="verdict v-good">🟢 主动去杠杆 + 分红</span></td></tr>
+  <tr><td>股利支付</td><td>分配股利/利息 0.47 亿</td><td>0.75 亿（含 2025 年度 10 派 6 元，共 5112 万，占归母净利 35.05%）</td><td><span class="verdict v-good">🟢 真金分红</span> <span class="muted">一边还债一边分红且不融资，现金实力佐证</span></td></tr>
+  <tr><td>偿债安全垫</td><td>利息保障倍数 26.22</td><td>28.29（2026H1 <b>33.67</b>）</td><td><span class="verdict v-good">🟢 充足</span></td></tr>
+</table>
+<h3>④ 现金流风格定位</h3>
+<table>
+  <tr><th>期间</th><th>经营</th><th>投资</th><th>筹资</th><th>分类</th><th>含义</th></tr>
+  <tr><td>2023</td><td>+</td><td>−</td><td>+</td><td>蛮牛型 (+−+)</td><td>借钱的扩张期</td></tr>
+  <tr><td>2024</td><td>+</td><td>−</td><td>+</td><td>蛮牛型 (+−+)</td><td>仍靠外部资金扩张</td></tr>
+  <tr><td><b>2025</b></td><td>+</td><td>−</td><td><b>−</b></td><td><b class="good">明星型 (+−−)</b></td><td>🟢 <b>自我造血、对外还债分红，八分类中最健康</b></td></tr>
+  <tr><td>2026H1</td><td>+</td><td>−</td><td>+</td><td>蛮牛型 (+−+)</td><td>筹资转正 +0.10 亿（规模极小），有季节性因素</td></tr>
+</table>
+<p>风格迁移路径：<b>蛮牛型（2023-2024）→ 明星型（2025）→（2026H1 回落至蛮牛型）</b>。按本框架"风格迁移比单期分类更有信息量"的原则：2024→2025 由"靠外部输血扩张"升级为"自我造血并反哺股东"，是<b>财务成熟度跃升的强信号</b>；2026H1 的短暂回落规模仅 0.10 亿，尚不足以判定为重新加杠杆，但需在 2026 年报确认是否延续明星型。</p>
+</div>
+
+<!-- ============ L6 ============ -->
+<h2>L6 · 价值评估与综合结论 <span class="tag">结论：三项全绿 ── ROIC、EVA、FCF 同时为正且改善，价值创造者身份被确认（但载体问题见尾）</span></h2>
+<div class="card">
+<table>
+  <tr><th>价值三问</th><th>2024 证据</th><th>2025 证据</th><th>判定</th></tr>
+  <tr><td>投入资本的回报够不够？</td><td>ROIC 7.28%</td><td><b>ROIC 14.02%</b> vs 股权成本 10%</td><td><span class="verdict v-good">🟢 已覆盖</span> <span class="muted">一年内从"不够"跨到"够且有余"</span></td></tr>
+  <tr><td>股东层面有没有剩余？</td><td>EVA −0.07 亿</td><td><b class="good">EVA +0.56 亿</b>（净利润 1.46 − 权益 9.05×10%）</td><td><span class="verdict v-good">🟢 由负转正</span></td></tr>
+  <tr><td>自由现金流能否兑现？</td><td>FCF +0.55 亿</td><td><b class="good">FCF +3.58 亿</b>（CFO 4.65 − 购建 1.07）</td><td><span class="verdict v-good">🟢 净利润的 2.45 倍</span></td></tr>
+</table>
+<div class="q"><b>三问全绿</b>意味着：按框架的价值标准，龙创设计 2025 年<b>是</b>价值创造者——投入资本回报覆盖了资金成本，股东层面产生了正剩余收益，且自由现金流真实兑现（不是靠会计利润）。<b>这是本框架在本次系列解读中得出的最积极的结论。</b><br>
+估值接口判断：① 定价基准可直接使用<b>账面净利润</b>（利润纯度极高、金融收益为负、非经常仅 8.8%），无需做剥离调整；② FCF 序列（2023 −0.32 / 2024 +0.55 / 2025 +3.58 亿）已可作为 DCF 输入，但需扣除 2025 年约 3.05 亿的营运资本释放（占款加深）后取常态化值；③ 溢价/折价方向：基本面支持溢价，但<b>新三板流动性应给以显著折价</b>——两个方向不抵消，因为它们作用在不同的维度（价值 vs 价格）。</div>
+</div>
+
+<!-- ============ 红旗与跟踪 ============ -->
+<h2>红旗清单与跟踪条件</h2>
+<div class="flag"><b>🔴 红旗 1（决定性，且非财务问题）：新三板载体。</b>公司为新三板创新层挂牌（832954.NQ），集合竞价交易、成交稀疏、无机构持续覆盖、无可靠估值锚；2023-06 申报创业板 IPO 已于 <b>2024-10-31 主动撤回终止</b>，目前无明确再申报时间表。L6 得出的"价值创造者"结论在财务上成立，但<b>无法通过二级市场价格兑现</b>。跟踪点：是否重启 IPO/转板——这是该标的价值实现路径的开关，重要性高于任何财务指标。</div>
+<div class="flagw"><b>🟠 红旗 2：ROE 提升的最大边际贡献是杠杆，且财务成本效应已转为侵蚀。</b>五因素中 ④（×1.346）排第一；③（财务成本效应）从 2024 的 0.993 降至 2025 的 0.921、2026H1 进一步降到 <b>0.772</b>——EBIT 被利息与汇兑吃掉的比例在快速上升。2026H1 财务费用 <b>3492 万</b>（其中利息费用仅 345 万，汇兑类约 3317 万），而 2025 年<b>全年</b>财务费用仅 1089 万。<b>跟踪点：若 2026 年报财务成本效应跌破 0.75 且杠杆继续上行，"杠杆驱动"将开始侵蚀主业改善的成果。</b></div>
+<div class="flagw"><b>🟠 红旗 3：CFO 高增的占款成色。</b>2025 年 4.65 亿 CFO 中，约 3.05 亿来自营运资本释放（合同负债从 1.26 亿暴增至 4.02 亿）。<b>合同负债是客户预付款，是竞争力的体现，但也是"未来的交付义务"</b>——它需要在后续期间以人力投入兑现。跟踪点：合同负债余额与营收增速的匹配度；若营收增速放缓而合同负债继续膨胀，则需警惕订单执行能力瓶颈。<b>另注：2026H1 经营现金流同比 −16.5%，与营收 +92.8% 背离，官方解释为"薪资与采购支出早于回款"，需在中报详细现金流表核实。</b></div>
+<div class="flag"><b>🟡 红旗 4：信用减值持续扩大。</b>2024 年 2311 万 → 2025 年 3018 万（+30.6%），与应收账款同期从 2.22 亿增至 4.05 亿（+82.6%）同步。虽然 2026H1 应收账款增速（+25.6% 较 2025 末）已显著慢于营收（+92.8%），显示回款改善，<b>但减值绝对额的上升趋势需在 2026 年报确认是否见顶</b>。</div>
+<div class="flag"><b>🟡 红旗 5：差异化色彩淡化。</b>毛利率 39.32%→35.33%→33.84%，研发费用率 7.65%→4.42%→3.77%（研发绝对额 2025 年反而微降至 6348 万）。一家自称"国家级工业设计中心"的技术型公司，研发强度连续两年稀释，与"差异化"定位产生张力。<b>跟踪点：2026 年报研发费用的绝对额是否恢复增长——若继续持平或下降，则报表画像将确认转向"项目承包交付型"。</b></div>
+<div class="card">
+<h3>条件化判断框架（非操作建议）</h3>
+<ul class="tight">
+  <li><b>若</b> 2026 年报同时满足【ROIC &gt; 12% 且 财务成本效应 &gt; 0.85 且 现金流风格维持明星型】→ 价值创造逻辑稳固，可与"IPO 重启/转板"预期叠加评估；</li>
+  <li><b>若</b>【财务成本效应跌破 0.75 或 杠杆继续抬升而 ROIC 下行】→ 归因从"A+B 混合"转纯"B 杠杆驱动"，ROE 的含金量降级，需重估；</li>
+  <li><b>若</b>【合同负债余额收缩 + 营收增速放缓】→ 占款模式与交付能力同时承压，CFO 将快速回吐，这是最需提前预警的组合；</li>
+  <li><b>定性前提</b>：本报告的全部结论仅描述"公司财务质量"，与"该项资产能否买到、以什么价格买到"是两个独立问题——新三板流动性使后者成为更硬的约束。</li>
+</ul>
+</div>
+
+<footer>
+  <p><b>口径与数据来源说明</b>：① 本报告全部数据取自 <b>Wind 金融数据（832954.NQ）</b>，关键项已与公司年报、半年报公开披露值交叉核对（2025 年营收 14.3587 亿、净利润 1.4613 亿、ROE 16.8556%、毛利率 35.334%、资产负债率 54.8871%、总资产 20.0673 亿，均完全一致）；② <b>指标计算方式为按框架方法论手动复算</b>——本目录 finmodel 引擎（Wind《财务分析模型（季度）》复现）依赖 A 股/北交所数据接口，<b>不含新三板挂牌公司数据通道</b>（已实测验证），故未能输出引擎级指标，相关口径已逐项标注；③ 五因素连乘结果与"净利润/股东权益"<b>三期完全吻合</b>（2024：9.1470% vs 9.1470%；2025：16.1418% vs 16.1418%；2026H1：10.1839% vs 10.1839%），口径自洽性已通过独立复算脚本验证；④ 股权资金成本率假设 10%；⑤ 2026H1 为半年未年化口径，与年度数据不可直接比较；⑥ 税后债务成本（2.40%）受利息资本化等因素影响偏低，属估算值；⑦ 员工人数为公开资料口径（2024 年约 2645 人 / 2025 年约 3396 人），人效指标为近似值；⑧ 解读框架见《公司财务解读分析框架_融合版 v1.0》。</p>
+  <p style="margin-top:6px"><b>关键科目口径定义（便于复现）</b>：息税前经营利润 = 利润总额 + 财务费用 −（投资收益 + 利息收入）；息前税后经营利润 = 息税前经营利润 ×（1 − 实际税率）；营运资本(净) =（应收票据+应收账款+其他应收款+预付款项+存货+合同资产）−（应付票据+应付账款+合同负债+应付职工薪酬+应交税费）；长期经营资产 = 固定资产 + 在建工程 + 无形资产 + 长期待摊费用；有息负债 = 短期借款 + 一年内到期的非流动负债 + 长期借款 + 租赁负债；ROIC = 息前税后经营利润 ÷（有息负债 + 股东权益）；EVA = 净利润 − 股东权益 × 10%；FCF = 经营活动现金流净额 − 购建长期资产支付的现金；净现比 = 经营活动现金流净额 ÷ 净利润。营收/成本/费用等均取报表原值，单位为亿元（Wind 原始单位为百万元/元，已换算）。</p>
+  <p style="margin-top:8px"><b>数据缺口（未取得，不作推测）</b>：2025 年投资收益明细、2024/2025 年报审计意见原文、应收账款账龄结构、2025H1 完整三表（用于五因素同期对比）、利息资本化金额。</p>
+  <p style="margin-top:8px"><b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。</p>
+</footer>
+</div>
+</body>
+</html>

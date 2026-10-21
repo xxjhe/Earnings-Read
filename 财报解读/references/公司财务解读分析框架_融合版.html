@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公司财务解读分析框架 · 《财务报表分析与股票估值》融合版</title>
+<style>
+  :root{
+    --ink:#1a2332; --sub:#5b6b7f; --line:#e3e8ef; --bg:#f6f8fa; --card:#ffffff;
+    --accent:#b03a2e; --up:#c0392b; --down:#1e8449; --blue:#1f4e79; --gold:#9a7b2d;
+    --tag-bg:#eef2f7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);
+       line-height:1.75;font-size:15px;padding:0 0 80px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{background:linear-gradient(135deg,#1f4e79,#2e6da4);color:#fff;padding:46px 24px 38px}
+  header .wrap{padding:0}
+  header h1{font-size:26px;letter-spacing:1px;margin-bottom:10px}
+  header p{opacity:.92;font-size:14px;max-width:860px}
+  .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+         border-radius:4px;padding:2px 10px;font-size:12px;margin:2px 6px 2px 0}
+  h2{font-size:20px;color:var(--blue);margin:44px 0 6px;padding-left:12px;border-left:5px solid var(--blue)}
+  h2 .ch{font-size:12px;color:var(--sub);font-weight:400;margin-left:10px}
+  h3{font-size:16px;color:var(--ink);margin:22px 0 8px}
+  .lead{color:var(--sub);font-size:14px;margin-bottom:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:16px 0;
+        box-shadow:0 1px 3px rgba(20,40,70,.05)}
+  .tldr{background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:10px;
+        padding:22px 26px;margin:26px 0}
+  .tldr h3{color:var(--accent);margin:0 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0;background:#fff}
+  th{background:#1f4e79;color:#fff;text-align:left;padding:8px 10px;font-weight:600;white-space:nowrap}
+  td{border:1px solid var(--line);padding:7px 10px;vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfd}
+  .tag{display:inline-block;background:var(--tag-bg);color:var(--blue);border-radius:3px;
+       padding:1px 7px;font-size:12px;margin:1px 3px 1px 0;white-space:nowrap}
+  .tag.k{background:#fdf3e7;color:var(--gold);border:1px solid #ecd9b0}
+  .red{color:var(--up);font-weight:600}
+  .green{color:var(--down);font-weight:600}
+  .muted{color:var(--sub);font-size:13px}
+  /* 流程图 */
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .fstep{display:flex;align-items:stretch;gap:14px}
+  .fnum{flex:0 0 54px;display:flex;flex-direction:column;align-items:center}
+  .fnum .dot{width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;
+             display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+  .fnum .bar{width:3px;flex:1;background:#c8d4e2;margin:4px 0}
+  .fbody{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-bottom:14px}
+  .fbody b{color:var(--blue)}
+  .fbody .src{font-size:12px;color:var(--sub)}
+  .gate{background:#fdf6f5;border:1px solid #ecc7c2;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13.5px}
+  .gate b{color:var(--accent)}
+  ul.tight{margin:6px 0 6px 22px}
+  ul.tight li{margin:4px 0}
+  .q{background:#f2f7ff;border-left:4px solid var(--blue);padding:8px 14px;margin:8px 0;font-size:13.5px;border-radius:0 6px 6px 0}
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.cols2{grid-template-columns:1fr}}
+  .tpl{background:#0f1b2d;color:#dfe8f2;border-radius:10px;padding:20px 24px;font-size:13.5px;
+       font-family:"Consolas","Courier New",monospace;white-space:pre-wrap;line-height:1.8;margin:12px 0}
+  .tpl .c{color:#8fb8e8}
+  footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--sub);font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>公司财务解读分析框架（融合版 v1.0）</h1>
+    <p>以《财务报表分析与股票估值》价值导向分析框架为主线（第2–11章），落地对接本目录 finmodel 引擎（Wind《财务分析模型（季度）》复现版）的五大模块指标输出，用于解读「报告二_XX_财务分析解读.html」与 output/*.csv 的分析结果。</p>
+    <div style="margin-top:12px">
+      <span class="badge">主线：创造价值</span>
+      <span class="badge">双核心：资产资本表 + 股权价值增加表</span>
+      <span class="badge">归因工具：ROE 五因素分解</span>
+      <span class="badge">验证工具：经营现金流含金量</span>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+
+<!-- ================= TL;DR ================= -->
+<div class="tldr">
+  <h3>一句话框架</h3>
+  <p><b>先判报表能不能信（Layer 0）→ 再判战略与报表是否自洽（Layer 1）→ 用两张重构报表看「钱在哪、钱从哪来、主业赚多少」（Layer 2–3）→ 用五因素分解回答「ROE 凭什么」（Layer 4）→ 用现金流三表逐项验证（Layer 5）→ 最后落到 EVA/ROIC/FCF 的价值结论（Layer 6）。</b></p>
+  <p class="muted" style="margin-top:8px">核心纪律（第2、3章主旨）：财报分析的第一步不是算指标，而是先判断这份报表能不能信；财务比率不许孤立解读，必须放回战略与商业活动中。任何一层亮红灯，后续层级的结论降级处理。</p>
+</div>
+
+<!-- ================= 总览流程 ================= -->
+<h2>框架总览：七层解读流水线 <span class="ch">对应第3章「战略→经营→财报→估值」全流程</span></h2>
+<div class="flow">
+  <div class="fstep"><div class="fnum"><div class="dot">0</div><div class="bar"></div></div>
+    <div class="fbody"><b>财报质量门禁</b>　<span class="src">第2章 · 六步法 + 舞弊识别 —— 报表可信才往下走</span></div></div>
+  <div class="fstep"><div class="fnum"><div class="dot">1</div><div class="bar"></div></div>
+    <div class="fbody"><b>战略识别与财报匹配</b>　<span class="src">第3、4章 · 成本领先 / 差异化的报表特征对照</span></div></div>
+  <div class="fstep"><div class="fnum"><div class="dot">2</div><div class="bar"></div></div>
+    <div class="fbody"><b>资产资本表解读</b>　<span class="src">第8章（核心创新1）· 资产结构 / 资本结构 / 期限匹配</span></div></div>
+  <div class="fstep"><div class="fnum"><div class="dot">3</div><div class="bar"></div></div>
+    <div class="fbody"><b>股权价值增加表解读</b>　<span class="src">第9章（核心创新2）· 剥离金融收益，看主业真实盈利</span></div></div>
+  <div class="fstep"><div class="fnum"><div class="dot">4</div><div class="bar"></div></div>
+    <div class="fbody"><b>ROE 五因素归因</b>　<span class="src">第10章（实操核心）· 主业变强 / 加杠杆 / 靠理财？</span></div></div>
+  <div class="fstep"><div class="fnum"><div class="dot">5</div><div class="bar"></div></div>
+    <div class="fbody"><b>现金流三表验证</b>　<span class="src">第6、7、11章 · 投资看战略、筹资看资本管理、经营看利润含金量</span></div></div>
+  <div class="fstep"><div class="fnum"><div class="dot">6</div></div>
+    <div class="fbody"><b>价值评估与综合结论</b>　<span class="src">第3章终点 · EVA / ROIC / FCFF / FCFE → 结论输出模板</span></div></div>
+</div>
+
+<!-- ================= Layer 0 ================= -->
+<h2>Layer 0 · 财报质量门禁 <span class="ch">第2章：财报原理及财报质量</span></h2>
+<p class="lead">财报数字是会计估计与职业判断的产物。解读任何指标之前，先过门禁：<b>过不了门禁的公司，后文所有「好指标」一律视为存疑。</b></p>
+
+<div class="card">
+  <h3>① 财报质量六步法（书中实操工具，逐步行）</h3>
+  <table>
+    <tr><th style="width:34px">#</th><th style="width:170px">步骤</th><th>操作要点</th><th style="width:280px">finmodel 引擎抓手</th></tr>
+    <tr><td>1</td><td>看审计意见</td><td>标准无保留意见是底线；保留意见 / 强调事项段 / 更换审计师 → 直接降信级</td><td class="muted">引擎外信息（年报正文）</td></tr>
+    <tr><td>2</td><td>看关键会计政策与估计变更</td><td>折旧年限、坏账计提比例、收入确认时点变更 → 问「变更当年利润往哪边动了」</td><td class="muted">引擎外信息 + 对比毛利率 / 减值比率的异常跳变</td></tr>
+    <tr><td>3</td><td>看勾稽关系是否自洽</td><td>利润表→资产负债表→现金流量表的链条能否合上</td><td><span class="tag">财务分析模块·误差项</span><span class="tag">债务分析·勾稽校验误差项</span></td></tr>
+    <tr><td>4</td><td>看利润与现金流匹配度</td><td>净利润持续增长而经营现金流持续背离 = 最典型的舞弊信号</td><td><span class="tag">净利润 vs 经营活动现金流净额</span></td></tr>
+    <tr><td>5</td><td>看非经常性损益占比</td><td>利润靠卖资产 / 政府补助 / 公允价值变动撑起来的，质量打折</td><td><span class="tag">收益质量(非经常/净利润)</span><span class="tag">扣非净利润增速</span></td></tr>
+    <tr><td>6</td><td>看业务逻辑合理性</td><td>毛利率、周转率显著偏离行业常识且无解释 → 红旗</td><td><span class="tag">毛利率</span><span class="tag">应收/存货周转天数</span>（对比同业）</td></tr>
+  </table>
+</div>
+
+<div class="gate"><b>门禁规则（任一触发 → 降信级并写入红旗清单）：</b>
+① 误差项（NOPLAT − 税后财务费用 − 净利润）绝对值占净利润 &gt; 5%（勾稽合不上）；
+② 收益质量（非经常/净利润）连续两期 &gt; 30%；
+③ 净利润为正且增长，但经营现金流净额连续两年为负或背离扩大；
+④ 扣非净利润增速与净利润增速长期反向；
+⑤ 毛利率 / 周转率跳变无法用业务变化解释。
+</div>
+
+<!-- ================= Layer 1 ================= -->
+<h2>Layer 1 · 战略识别与财报匹配 <span class="ch">第3、4章：分析框架总纲 + 战略与财报的关系</span></h2>
+<p class="lead">不同竞争战略，财报呈现完全不同的特征。拿到报表先回答两个问题：<b>这家公司自称什么战略？报表结构配得上这个战略吗？</b></p>
+
+<div class="cols2">
+<div class="card">
+  <h3>总成本领先战略的报表画像</h3>
+  <ul class="tight">
+    <li>毛利率<span class="red">低</span>但稳定，靠<b>资产周转率</b>赚钱</li>
+    <li>销售 / 管理费用率压到行业最低</li>
+    <li>重资产行业常见：长期经营资产占比高</li>
+    <li>现金流特征：经营现金流厚实，资本开支纪律严格</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>差异化战略的报表画像</h3>
+  <ul class="tight">
+    <li>毛利率<span class="red">高</span>且有定价权（提价不掉量）</li>
+    <li>研发 / 销售费用率<b>高</b>（差异化的成本）</li>
+    <li>轻资产：无形资产、商誉、研发投入占比高</li>
+    <li>现金流特征：预收 / 应付占款能力强，现金周期短甚至为负</li>
+  </ul>
+</div>
+</div>
+
+<div class="card">
+  <h3>自洽性检查（财报 vs 宣称战略）</h3>
+  <table>
+    <tr><th>检查点</th><th>引擎指标</th><th>判读</th></tr>
+    <tr><td>行业底色（重/轻资产）</td><td><span class="tag">长期经营资产 / 资产总额(模型口径)</span></td><td>占比高=重资产底色，先看产能利用率与扩张纪律；占比低=轻资产，重点看人效与无形资产</td></tr>
+    <tr><td>宣称差异化但毛利平庸</td><td><span class="tag">毛利率</span><span class="tag">息税前经营利润率</span></td><td>毛利率不高于同业 + 费用率也不高 → 差异化是口号，实为同质化竞争</td></tr>
+    <tr><td>宣称成本领先但周转不快</td><td><span class="tag">资产周转率</span><span class="tag">存货周转天数</span><span class="tag">应收周转天数</span></td><td>低毛利 + 低周转 = 既没有价格也没有效率，最差组合</td></tr>
+    <tr><td>战略是否在变</td><td>毛利率 / 费用率 / 资产结构的<b>三年趋势</b></td><td>结构迁移方向 = 真实战略方向（比年报「经营讨论」更诚实）</td></tr>
+  </table>
+</div>
+
+<!-- ================= Layer 2 ================= -->
+<h2>Layer 2 · 资产资本表解读 <span class="ch">第8章 · 全书核心创新①：重构资产负债表</span></h2>
+<p class="lead">把传统资产负债表重排为「<b>资产端：经营资产 + 金融资产</b>」对「<b>资本端：经营负债 + 有息债务 + 股东权益</b>」。回答三个问题：钱投在哪？钱从哪来？期限配不配？</p>
+
+<div class="card">
+  <h3>① 资产结构：钱投在哪</h3>
+  <table>
+    <tr><th>重构科目</th><th>引擎指标（output CSV 行名）</th><th>解读要点</th></tr>
+    <tr><td>长期经营资产</td><td><span class="tag">资产资本分析|资产结构|长期经营资产</span></td><td>主业的家底（固定资产+在建+无形+商誉等）。占比趋势上升=加注主业；警惕商誉占比虚胖</td></tr>
+    <tr><td>营运资本（净）</td><td><span class="tag">营运资产</span><span class="tag">营运负债</span><span class="tag">营运资本</span><span class="tag">追加营运资本</span></td><td>营运资本为正且随营收膨胀 = 增长在吃现金；为负 = 占上下游的款做生意（强势标志）</td></tr>
+    <tr><td>金融资产</td><td><span class="tag">金融资产合计</span></td><td>货币资金+理财+投资性房地产。占比过高要追问：钱为什么不投主业？是找不到机会还是在等分红回购？</td></tr>
+    <tr><td>长期股权投资</td><td><span class="tag">长期股权投资</span></td><td>单列（第9章同样单列其收益）。频繁变动=资本运作活跃，查投资标的与主业协同性</td></tr>
+    <tr><td>校验</td><td><span class="tag">资产总额(模型口径)</span></td><td>= 长期经营资产 + 长投 + 营运资本(净) + 金融资产 + 其他，应能重建资产全貌</td></tr>
+  </table>
+  <h3>② 资本结构：钱从哪来</h3>
+  <table>
+    <tr><th>重构科目</th><th>引擎指标</th><th>解读要点</th></tr>
+    <tr><td>有息债务</td><td><span class="tag">短期有息负债</span><span class="tag">长期有息负债</span><span class="tag">有息负债合计</span><span class="tag">有息负债率</span></td><td>只有「要付利息的钱」才是真债务压力。有息负债率的行业分位比绝对值更重要</td></tr>
+    <tr><td>财务杠杆</td><td><span class="tag">财务杠杆(有息/权益)</span></td><td>杠杆是否创造价值 → 与 Layer 4 的「ROIC vs 税前债务成本」联判</td></tr>
+    <tr><td>无息负债</td><td><span class="tag">无息及其他负债</span></td><td>应付/预收类是「免费的钱」，能多用是竞争力；但突然膨胀要查是否拖欠供应商</td></tr>
+    <tr><td>股东权益</td><td><span class="tag">股东权益</span><span class="tag">留存收益</span><span class="tag">留存比例</span></td><td>权益增长靠利润留存（内生）还是定增（外生），Layer 4 再投资拆分验证</td></tr>
+  </table>
+  <h3>③ 期限匹配：识别资金错配（本书批判传统流动比率的替代工具）</h3>
+  <table>
+    <tr><th>指标</th><th>引擎字段</th><th>判读规则</th></tr>
+    <tr><td>营运资本长期化率</td><td><span class="tag">营运资本长期化率</span></td><td><b>&gt;100%</b>：营运资本全部由长期资金支持，稳健；<b>&lt;100%</b>：部分营运资本靠短期债务滚动，滚动断裂即流动性危机；<b>持续下行</b>比单期低更危险</td></tr>
+    <tr><td>长期融资净额</td><td><span class="tag">长期融资净额</span></td><td>为负 = 长期资金来源覆盖不了长期资产占用，差额靠短债补 → 典型「短债长投」红旗</td></tr>
+    <tr><td>短债占比</td><td><span class="tag">短期有息负债 / 有息负债合计</span></td><td>短债占比高 + 长期化率低 + 现金自给率低（Layer 5）= 三重叠加，流动性风险实质化</td></tr>
+  </table>
+</div>
+
+<!-- ================= Layer 3 ================= -->
+<h2>Layer 3 · 股权价值增加表解读 <span class="ch">第9章 · 全书核心创新②：重构利润表</span></h2>
+<p class="lead">核心动作：<b>把金融资产收益、长期股权投资收益从利润中剥离单列</b>，看清主营业务真正创造了多少收益。引擎的「股权增加值分析」模块已完整实现这一重构。</p>
+
+<div class="card">
+  <h3>逐层拆解路径（自上而下读，每跳一层问一个为什么）</h3>
+  <table>
+    <tr><th style="width:230px">层级</th><th>引擎指标</th><th>该层要回答的问题</th></tr>
+    <tr><td>收入与毛利</td><td><span class="tag">营业收入增长率</span><span class="tag">毛利率</span><span class="tag">销量贡献</span><span class="tag">毛利率贡献</span></td><td>毛利增长靠「量」还是「价/结构」？靠量的增长要查产能与行业需求，靠价的增长要查可持续性</td></tr>
+    <tr><td>阶段利润1</td><td><span class="tag">阶段利润1(收入-成本-销售-税金)</span></td><td>产品在市场上本身的赚钱效应（扣除最直接的获客成本后）</td></tr>
+    <tr><td>阶段利润2</td><td><span class="tag">阶段利润2</span><span class="tag">行政管理费</span><span class="tag">资产减值/长期经营资产</span><span class="tag">信用减值/应收类资产</span></td><td>管理费用是否失控；减值比率异常升高 = 资产质量恶化的先行信号（也是利润洗澡高发区）</td></tr>
+    <tr><td>息税前经营利润</td><td><span class="tag">息税前经营利润</span><span class="tag">息前税后经营利润</span></td><td><b>主业真实盈利能力的锚</b>。它为正且增长，公司才有基本面</td></tr>
+    <tr><td>金融资产收益（剥离项）</td><td><span class="tag">息税前金融资产收益</span><span class="tag">息前税后金融资产收益</span><span class="tag">经营利润占比</span><span class="tag">金融收益占比</span></td><td>金融收益占比高 = 利润靠理财/炒股/卖房，主业实际在退步。<b>经营利润占比 &lt; 70% 即需专门解释</b></td></tr>
+    <tr><td>财务成本与税</td><td><span class="tag">利息率</span><span class="tag">税后财务费用</span><span class="tag">财务成本负担率</span><span class="tag">实际税率</span></td><td>财务成本负担率（1 − 税前利润/EBIT）高 =  EBIT 被利息吃掉的比例大，杠杆在毁价值</td></tr>
+    <tr><td>净利润与质量</td><td><span class="tag">净利润</span><span class="tag">扣非净利润</span><span class="tag">收益质量(非经常/净利润)</span><span class="tag">归母净利润增速</span></td><td>扣非 vs 非扣非的裂口 = 一次性收益粉饰空间；归母 vs 净利润裂口 = 少数股东分走多少</td></tr>
+  </table>
+  <div class="q"><b>本层结论句式：</b>「公司 X 年净利润 Y 亿，其中息前税后经营利润 Z 亿（占比 W%）——主业【是/不是】利润的主要来源；金融收益贡献 ……；非经常性损益占比 ……。」</div>
+</div>
+
+<!-- ================= Layer 4 ================= -->
+<h2>Layer 4 · ROE 五因素归因 <span class="ch">第10章 · 两张重构表综合分析（基本面实操核心）</span></h2>
+<p class="lead">对 ROE 做五因素分解（区别于传统杜邦三因子），逐一拆解驱动因子，回答唯一的问题：<b>ROE 的提升，到底是主业变强了，还是加杠杆 / 靠理财 / 靠税收优惠堆出来的？</b></p>
+
+<div class="card">
+  <h3>五因素分解公式（引擎「杜邦分解」分组已实现）</h3>
+  <div class="q">ROE = <b>①息税前经营利润率</b> × <b>②资产周转率</b> × <b>③财务成本效应</b> × <b>④财务杠杆倍数</b> × <b>⑤所得税效应</b></div>
+  <table>
+    <tr><th style="width:34px">#</th><th style="width:180px">因子</th><th>引擎指标</th><th>归因含义</th></tr>
+    <tr><td>①</td><td>经营盈利能力</td><td><span class="tag">息税前经营利润率</span></td><td>上升的含金量最高 —— 主业竞争力变强（定价权/成本管控）</td></tr>
+    <tr><td>②</td><td>资产运营效率</td><td><span class="tag">资产周转率</span></td><td>上升 = 同样的资产挤出更多收入；与①结合区分「利润率驱动」vs「周转驱动」模式</td></tr>
+    <tr><td>③</td><td>财务成本效应</td><td><span class="tag">财务成本效应</span><span class="tag">财务成本负担率</span></td><td>利息侵蚀程度。该因子恶化抵消①②的改善 = 赚的钱在喂银行</td></tr>
+    <tr><td>④</td><td>财务杠杆倍数</td><td><span class="tag">财务杠杆倍数</span></td><td>ROE 靠它上升 = 加杠杆驱动，<b>必须</b>回 Layer 2 查期限匹配 + 本层查 ROIC vs 债务成本</td></tr>
+    <tr><td>⑤</td><td>所得税效应</td><td><span class="tag">所得税效应</span><span class="tag">实际税率</span></td><td>税率突降带来的 ROE 提升不可持续（政策红利有时效）</td></tr>
+  </table>
+
+  <h3>归因配套工具</h3>
+  <table>
+    <tr><th>工具</th><th>引擎指标</th><th>用途</th></tr>
+    <tr><td>净利润增长拆分</td><td><span class="tag">毛利贡献率</span><span class="tag">费用贡献率</span><span class="tag">税费贡献率</span><span class="tag">财务贡献率</span></td><td>本期净利润增量由谁贡献 —— 与五因素归因交叉验证</td></tr>
+    <tr><td>再投资拆分</td><td><span class="tag">净利润增长率</span><span class="tag">ROE变化</span><span class="tag">未分配利润再投资</span><span class="tag">筹资再投资</span></td><td>利润增长靠留存再投资（内生）还是靠新融资（外生稀释）</td></tr>
+    <tr><td>去杠杆检验</td><td><span class="tag">核心ROIC</span><span class="tag">去杠杆ROCE</span><span class="tag">税前债务成本</span></td><td><b>杠杆是否创造价值：</b>ROIC &gt; 税后债务成本 → 杠杆放大价值；ROIC &lt; 税后债务成本 → 杠杆毁价值，ROE 越高越危险</td></tr>
+  </table>
+
+  <div class="q"><b>归因结论三选一：</b>
+  <span class="green">A. 主业驱动</span>（①或②改善、④平稳）→ 高置信度看多基本面；
+  <span style="color:#b9770e;font-weight:600">B. 杠杆驱动</span>（④上升为主）→ 结论必须附带 ROIC vs 债务成本 与 Layer 2 期限匹配的检验结果；
+  <span class="red">C. 非经营驱动</span>（金融收益/税率/非经常项贡献大）→ 盈利质量降级，估值应剔除此部分利润后再做。</div>
+</div>
+
+<!-- ================= Layer 5 ================= -->
+<h2>Layer 5 · 现金流三表验证 <span class="ch">第6、7、11章</span></h2>
+<p class="lead">利润可以被会计调节，现金流更难造假。三张现金流切片分别验证：战略是不是真的在落地（投资）、资本管理稳不稳（筹资）、账面利润是不是真金白银（经营）。</p>
+
+<div class="card">
+  <h3>① 经营现金流 → 验证利润含金量（第11章）</h3>
+  <table>
+    <tr><th>检查</th><th>引擎指标</th><th>判读</th></tr>
+    <tr><td>利润-现金匹配</td><td><span class="tag">净利润</span> vs <span class="tag">经营活动现金流净额</span></td><td>长期 CFO/净利润 显著 &lt; 1 = 利润是账面数字。重资产公司 CFO 应明显高于净利润（折旧加回）</td></tr>
+    <tr><td>收入占用现金</td><td><span class="tag">应收周转天数</span><span class="tag">存货周转天数</span><span class="tag">现金周期</span></td><td>应收天数拉长 = 收入虚增或客户恶化；存货天数拉长 = 积压跌价前兆；现金周期 = 做生意要自己垫多少钱</td></tr>
+    <tr><td>补偿后盈余</td><td><span class="tag">经营补偿后现金盈余</span></td><td>CFO 扣掉非付现成本后的真实现金创造能力</td></tr>
+  </table>
+  <h3>② 投资现金流 → 验证战略落地（第6章）</h3>
+  <table>
+    <tr><th>检查</th><th>引擎指标</th><th>判读</th></tr>
+    <tr><td>钱投去哪了</td><td><span class="tag">长期资产净投资</span><span class="tag">净合并(取得-处置子公司)</span><span class="tag">净其他投资</span></td><td>区分<b>战略型</b>（购建长期资产、并购主业）与<b>理财类</b>（净其他投资）——理财类大额流出与主业战略无关，说明主业找不到投资机会</td></tr>
+    <tr><td>扩张强度</td><td><span class="tag">扩张性资本投资</span><span class="tag">扩张比例</span></td><td>扩张性资本投资 = 净投资 − 折旧摊销（超过维持性开支的部分才是真扩张）；扩张比例 = 相对期初长期资产的扩张力度</td></tr>
+    <tr><td>投资效率</td><td><span class="tag">研发效率(Δ收入/(研发+扩张投资))</span></td><td>投出去的钱有没有转化为收入增长；资本开支回报能否超过资本成本（对接 Layer 6 的 ROIC vs 资金成本）</td></tr>
+  </table>
+  <h3>③ 筹资现金流 → 验证资本管理（第7章）</h3>
+  <table>
+    <tr><th>维度（书中五维度）</th><th>引擎指标</th><th>判读</th></tr>
+    <tr><td>现金缺口与融资规模</td><td><span class="tag">投资筹资需求</span><span class="tag">现金自给率</span><span class="tag">筹资净额(模型口径)</span></td><td>自给率=经营现金流/投资需求（封顶100%）。自给率长期 &lt; 50% 且持续融资 = 造血不足靠输血</td></tr>
+    <tr><td>融资成本</td><td><span class="tag">税前债务成本</span><span class="tag">税后债务成本</span><span class="tag">利息率</span></td><td>债务成本显著高于同期限市场利率 = 金融机构给它的风险定价差，被动高息借钱续命的信号</td></tr>
+    <tr><td>期限结构</td><td><span class="tag">新增短期有息</span><span class="tag">新增长期有息</span></td><td>新增债务短期化 = 银行不愿放长钱，与 Layer 2 长期化率联判</td></tr>
+    <tr><td>融资目的与方式</td><td><span class="tag">债务筹资净额</span><span class="tag">股权筹资净额</span><span class="tag">股利支付</span></td><td>一边大额分红一边大额举债/定增 = 逻辑矛盾，查资金去向</td></tr>
+  </table>
+  <h3>④ 现金流风格定位（引擎八分类）</h3>
+  <p class="muted">按经营/投资/筹资净额正负分为八类：<b>老母鸡型(++-)</b>高股息价值股；<b>明星型(+--)</b>自我造血扩张；<b>蛮牛型(+-+)</b>加杠杆赌项目前景；<b>妖精型(+++)</b>融资也来投资也来，查是否有项目陷阱；其余四类（骗吃骗喝/混吃等死/赌徒/大出血）原则上不关注，赌徒型仅在确认拐点时例外。<b>风格迁移路径</b>（如明星型→蛮牛型→妖精型）比单期分类更有信息量。</p>
+</div>
+
+<!-- ================= Layer 6 ================= -->
+<h2>Layer 6 · 价值评估与综合结论 <span class="ch">第3章终点：从财报分析走向价值评估</span></h2>
+<div class="card">
+  <h3>价值创造三问（引擎「财务分析」汇总模块）</h3>
+  <table>
+    <tr><th>问题</th><th>引擎指标</th><th>判读</th></tr>
+    <tr><td>投入资本的回报够不够？</td><td><span class="tag">ROIC</span><span class="tag">ROIC(摊薄)</span><span class="tag">核心ROIC</span></td><td>ROIC 持续 &gt; 资金成本（股权成本假设10%，可调）= 真创造价值；核心ROIC 看纯主业</td></tr>
+    <tr><td>股东层面有没有剩余？</td><td><span class="tag">经济增加值EVA</span><span class="tag">剩余收益RE</span><span class="tag">ROCE</span></td><td>EVA = 净利润 − 股东权益×10%。EVA 为正且增长才是为股东赚钱，否则利润只是「会计幻觉」</td></tr>
+    <tr><td>自由现金流能否兑现？</td><td><span class="tag">FCFF</span><span class="tag">经营FCFF</span><span class="tag">FCFE</span></td><td>FCFF = EBITDA − 税 − 追加营运资本 − 扩张性资本投资。长期为负的「成长股」本质是靠资本市场输血</td></tr>
+  </table>
+  <div class="q"><b>与估值的衔接（本书第12章以后的方向，本框架止于接口）：</b>FCFF/FCFE 序列是 DCF 的直接输入；ROIC、EVA、经营利润占比、杠杆质量决定估值时该给「主业利润」还是「账面净利润」定价、以及溢价/折价方向。估值参数（股权成本率）与引擎 <code>--cqe</code> 参数保持一致。</div>
+</div>
+
+<!-- ================= 映射总表 ================= -->
+<h2>附录A · 框架 ↔ finmodel 引擎指标映射总表</h2>
+<table>
+  <tr><th style="width:150px">书中章节</th><th style="width:200px">分析维度</th><th>引擎模块 · 关键指标</th></tr>
+  <tr><td>第2章 财报质量</td><td>六步法 / 舞弊识别</td><td>股权增加值分析：误差项、收益质量、扣非净利润；债务分析：勾稽校验误差项；现金流分析·利润含金量组：<b>净现比(CFO/净利润)、销售收现比、购货付现比</b></td></tr>
+  <tr><td>第3、4章 战略</td><td>成本领先 / 差异化识别</td><td>毛利率、息税前经营利润率、资产周转率、<b>费用率组（销售/管理/研发/财务费用率）</b>、<b>资产结构占比组（金融资产/长期经营资产/营运资本占比）</b>、现金周期</td></tr>
+  <tr><td>第5章 报表勾稽</td><td>四表联动</td><td>两大误差项（利润口径 + 现金口径）自动校验</td></tr>
+  <tr><td>第6章 投资现金流</td><td>战略落地验证</td><td>现金流分析：扩张性资本投资、扩张比例、净合并、净其他投资、研发效率</td></tr>
+  <tr><td>第7章 筹资现金流</td><td>资本管理五维度</td><td>债务分析：现金自给率、投资筹资需求、税前/税后债务成本、新增有息债务期限结构；<b>偿债能力组：利息保障倍数(EBIT/EBITDA)、经营现金流/有息负债、净债务/EBITDA</b></td></tr>
+  <tr><td>第8章 资产资本表</td><td>资产/资本/期限匹配</td><td>资产资本分析：金融资产、营运资本、长期经营资产、有息负债率、财务杠杆、长期融资净额、<b>营运资本长期化率</b>；<b>短期有息占比、净债务、资产负债率(报表口径)、商誉/净资产、少数股东权益占比</b></td></tr>
+  <tr><td>第9章 股权价值增加表</td><td>主业盈利剥离</td><td>股权增加值分析：阶段利润1/2、息税前经营利润、息前税后金融资产收益、经营利润占比、金融收益占比、<b>少数股东损益占比</b></td></tr>
+  <tr><td>第10章 综合分析</td><td>ROE 五因素分解</td><td>资产资本分析·杜邦分解五因子；股权增加值分析：净利润增长拆分、再投资拆分；核心ROIC、去杠杆ROCE</td></tr>
+  <tr><td>第11章 经营现金流</td><td>利润含金量</td><td>现金流分析：CFO、经营补偿后现金盈余、FCF；营运效率组：应收/存货/应付周转天数</td></tr>
+  <tr><td>第3章终点</td><td>价值评估接口</td><td>财务分析：ROIC、EVA、FCFF、FCFE、ROCE；回报对比组（ROE / 核心ROIC / 去杠杆ROCE / 债务成本 / 股权成本）</td></tr>
+</table>
+
+<!-- ================= 红绿灯速查 ================= -->
+<h2>附录B · 红绿灯速查表 <span class="ch">阈值为经验参考值，需按行业校准</span></h2>
+<table>
+  <tr><th>信号</th><th>指标（引擎字段）</th><th style="width:150px">🟢 健康</th><th style="width:150px">🟡 关注</th><th style="width:170px">🔴 红旗</th></tr>
+  <tr><td>报表可信度</td><td>误差项 / 净利润</td><td>&lt;2%</td><td>2%–5%</td><td>&gt;5% 或审计非标</td></tr>
+  <tr><td>利润主业纯度</td><td>经营利润占比</td><td>&gt;85%</td><td>70%–85%</td><td>&lt;70% 且金融收益为主</td></tr>
+  <tr><td>利润含金量</td><td>CFO / 净利润（多年均值）</td><td>&gt;1（重资产 &gt;1.2）</td><td>0.7–1</td><td>&lt;0.7 或连续背离</td></tr>
+  <tr><td>收益质量</td><td>非经常损益 / 净利润</td><td>&lt;10%</td><td>10%–30%</td><td>&gt;30% 连续两期</td></tr>
+  <tr><td>期限匹配</td><td>营运资本长期化率</td><td>&gt;100% 且稳定</td><td>80%–100% 或下行</td><td>&lt;80% 或长期融资净额为负</td></tr>
+  <tr><td>杠杆是否创造价值</td><td>ROIC vs 税后债务成本</td><td>ROIC − 成本 &gt; 3pct</td><td>0–3pct</td><td>ROIC &lt; 税后债务成本</td></tr>
+  <tr><td>造血能力</td><td>现金自给率</td><td>&gt;80%</td><td>50%–80%</td><td>&lt;50% 且持续融资</td></tr>
+  <tr><td>价值创造</td><td>EVA / FCFF</td><td>EVA&gt;0 且 FCFF&gt;0</td><td>其一为负</td><td>两者长期为负</td></tr>
+  <tr><td>减值预警</td><td>资产减值/长期经营资产、信用减值/应收类</td><td>稳定低位</td><td>单期抬升</td><td>骤升（查洗澡/恶化）</td></tr>
+  <tr><td>营运恶化</td><td>应收+存货周转天数变动</td><td>缩短或持平</td><td>拉长 &lt;20%</td><td>拉长 &gt;20% 且营收增速下滑</td></tr>
+</table>
+<p class="muted">注：以上为通用经验带，实际解读时必须换成<b>行业分位 + 本公司 3–5 年趋势</b>双基准（第4章：行业属性决定报表底色，跨行业比绝对值无意义）。</p>
+
+<!-- ================= 输出模板 ================= -->
+<h2>附录C · 报告二「核心解读」章节输出模板</h2>
+<p class="lead">每份公司财务解读报告的核心解读部分，按此模板产出（七层各一段，缺一不可；某层不适用时写明原因而非省略）：</p>
+<div class="tpl">
+【0 可信度】审计意见类型 + 勾稽误差 + 非经常占比 + CFO/净利润匹配度
+  → 结论：报表【可信 / 降信级】，红旗：……（无则写"未发现"）
+【1 战略】公司宣称战略 vs 报表画像是否一致；行业底色（重/轻资产）；
+  毛利/周转/费用结构指向的真实竞争模式是【成本领先 / 差异化 / 无清晰战略】
+【2 资产资本】钱在：长期经营资产 X%、营运资本 X%、金融资产 X%；
+  钱来：有息负债率 X%、财务杠杆 X 倍；
+  匹配：营运资本长期化率 X%（趋势↑/↓）→【稳健 / 短债长投风险】
+【3 主业盈利】息税前经营利润 X 亿（增速 X%），经营利润占比 X%；
+  金融收益/非经常项贡献 X% → 主业真实盈利能力【增强 / 原地 / 退步】
+【4 ROE 归因】ROE X%（同比 +X pct），五因素中主驱动是【①利润率/②周转/③财务成本/④杠杆/⑤税负】
+  → 归因类型：【A 主业驱动 / B 杠杆驱动 / C 非经营驱动】
+  杠杆检验：核心ROIC X% vs 税后债务成本 X%
+【5 现金流验证】CFO/净利润 = X；现金流风格【八分类】及迁移路径；
+  投资：扩张比例 X%、理财类流出 X 亿；筹资：现金自给率 X%、债务成本 X%、新增债务期限结构
+【6 价值结论】ROIC X% vs 股权成本 10%；EVA 为【正/负】X 亿；FCFF X 亿
+  → 该公司【是 / 不是】价值创造者，估值应对【主业利润 / 账面净利润】定价
+【一句话结论】……（含核心证据 2 条 + 最大风险 1 条）</div>
+
+<footer>
+  <p><b>口径与免责说明</b>：① 本框架为解读方法论，不含任何买卖建议；② finmodel 引擎为 Wind《财务分析模型（季度）》的复现实现，部分附注类数据（坏账准备、固定资产原值、授信额度等）脚本无法获取，相关指标（如固定资产成新率）输出为空并在报告中注明，解读时不得自行补数；③ 股权资金成本率默认 10%（引擎 <code>--cqe</code> 参数可调），涉及 EVA/RE/ROCE 的结论随该假设变动；④ 附录B 阈值为经验参考，使用前必须按行业分位校准；⑤ 框架版本 v1.0（2026-10-10），依据《财务报表分析与股票估值》第2–11章与 finmodel 引擎当前指标集对齐。</p>
+</footer>
+</div>
+</body>
+</html>

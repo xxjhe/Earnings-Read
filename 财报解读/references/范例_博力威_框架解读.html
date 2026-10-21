@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博力威(688345) · 七层框架财务解读</title>
+<style>
+  :root{--ink:#1a2332;--sub:#5b6b7f;--line:#e3e8ef;--bg:#f6f8fa;--blue:#1f4e79;
+        --bad:#c0392b;--good:#1e8449;--warn:#b9770e;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px;padding-bottom:70px}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  header{background:linear-gradient(135deg,#1f4e79,#2e6da4);color:#fff;padding:40px 24px 32px}
+  header .wrap{padding:0}
+  header h1{font-size:24px;margin-bottom:8px}
+  header p{opacity:.92;font-size:13.5px}
+  .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:1px 9px;font-size:12px;margin:2px 6px 2px 0}
+  h2{font-size:19px;color:var(--blue);margin:40px 0 4px;padding-left:12px;border-left:5px solid var(--blue)}
+  h2 .tag{font-size:12px;color:var(--sub);font-weight:400;margin-left:10px}
+  h3{font-size:15.5px;margin:18px 0 6px}
+  .lead{color:var(--sub);font-size:13.5px;margin-bottom:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:14px 0;box-shadow:0 1px 3px rgba(20,40,70,.05)}
+  .tldr{background:#fff;border:1px solid var(--line);border-left:6px solid var(--bad);border-radius:10px;padding:22px 26px;margin:24px 0}
+  .tldr h3{color:var(--bad);margin-bottom:8px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .kpi .t{font-size:12px;color:var(--sub)}
+  .kpi .v{font-size:19px;font-weight:700;margin:3px 0 1px}
+  .kpi .s{font-size:11.5px;color:var(--sub)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;background:#fff}
+  th{background:#1f4e79;color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+  td{border:1px solid var(--line);padding:6px 9px;vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfd}
+  .bad{color:var(--bad);font-weight:700}.good{color:var(--good);font-weight:700}.warn{color:var(--warn);font-weight:700}
+  .verdict{display:inline-block;border-radius:4px;padding:2px 10px;font-weight:700;font-size:13px}
+  .v-good{background:#e8f6ee;color:var(--good);border:1px solid #bfe3cd}
+  .v-warn{background:#fdf6e7;color:var(--warn);border:1px solid #ecd9a8}
+  .v-bad{background:#fdecea;color:var(--bad);border:1px solid #f0c3bc}
+  .q{background:#f2f7ff;border-left:4px solid var(--blue);padding:9px 15px;margin:10px 0;font-size:13.5px;border-radius:0 6px 6px 0}
+  .flag{background:#fdecea;border:1px solid #f0c3bc;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px}
+  .muted{color:var(--sub);font-size:12.5px}
+  ul.tight{margin:6px 0 6px 22px}ul.tight li{margin:4px 0}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--sub);font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>博力威（688345.SH）· 财务解读报告</h1>
+    <p>解读框架：《财务报表分析与股票估值》七层融合框架 v1.1 ｜ 计算引擎：finmodel（Wind《财务分析模型（季度）》复现 + 框架补充指标）｜ 数据源：akshare/东方财富 ｜ 单位：亿元人民币 ｜ 数据截至：2025 年年报 + 2026 年半年报（2026-06-30）｜ 生成日期：2026-10-10</p>
+    <div style="margin-top:10px">
+      <span class="badge">主营：轻型车用锂电池（电踏车/电摩/电动工具等，业务描述据公开资料，需以年报为准）</span>
+      <span class="badge">股权资金成本假设 10%</span>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+
+<!-- ============ 首屏结论 ============ -->
+<div class="tldr">
+  <h3>一句话结论</h3>
+  <p><b>博力威是一家典型的总成本领先型锂电 PACK 企业，2025 年出现"量价齐升 + 现金流转正"的困境反转，且五因子归因确认为主业驱动；但反转尚未兑现为价值创造——核心 ROIC（4.0%）仍低于税后债务成本（6.4%），EVA 连续第三年为负，2025 年强劲的经营现金流有相当部分来自对上游占款加深（现金周期 -45 天）。当前处于"基本面修复确认、价值创造未确认"的阶段；2026 上半年收入加速（Q2 +40%）但毛利率重新承压、有息债务回升，反转的成色仍在检验中。</b></p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="t">2025 营业收入</div><div class="v">27.35 亿</div><div class="s">同比 +48.3%（2026Q2 单季 +40.0%）</div></div>
+  <div class="kpi"><div class="t">2025 归母净利润</div><div class="v">0.56 亿</div><div class="s">扭亏（2024 为 -0.97 亿）</div></div>
+  <div class="kpi"><div class="t">息前税后经营利润</div><div class="v">0.49 亿</div><div class="s">主业真实盈利（2024 为 -0.97 亿）</div></div>
+  <div class="kpi"><div class="t">2025 经营现金流</div><div class="v">3.39 亿</div><div class="s">历史新高，净现比 6.2</div></div>
+  <div class="kpi"><div class="t">ROE / 核心ROIC</div><div class="v">4.8% / 4.0%</div><div class="s">均低于 10% 股权成本</div></div>
+  <div class="kpi"><div class="t">EVA</div><div class="v bad">-0.58 亿</div><div class="s">连续第三年为负</div></div>
+  <div class="kpi"><div class="t">有息负债率</div><div class="v">15.1%</div><div class="s">净债务 -1.53 亿（净现金）</div></div>
+  <div class="kpi"><div class="t">现金流风格</div><div class="v">明星型</div><div class="s">2024-2025 连续（+--）</div></div>
+</div>
+
+<!-- ============ L0 ============ -->
+<h2>L0 · 财报质量门禁 <span class="tag">结论：通过，但 2023-2024 有大额减值出清史，2025 修复含低基数效应</span></h2>
+<div class="card">
+<table>
+  <tr><th>门禁检查</th><th>数值（2025）</th><th>判定</th></tr>
+  <tr><td>利润口径勾稽误差（NOPLAT−税后财务费用−净利润）</td><td>≈ 0（10⁻¹⁵ 量级）</td><td><span class="verdict v-good">🟢 通过</span></td></tr>
+  <tr><td>现金口径勾稽误差（模型重建差异）</td><td>0.11 亿（历年均在 ±0.21 亿内）</td><td><span class="verdict v-good">🟢 通过</span> <span class="muted">系模型近似口径差，非舞弊信号</span></td></tr>
+  <tr><td>非经常性损益 / 净利润</td><td>26.4%（0.14 亿）</td><td><span class="verdict v-warn">🟡 关注</span> <span class="muted">补助/理财类收益贡献利润</span></td></tr>
+  <tr><td>净利润 vs 经营现金流匹配</td><td>2021-2024 净现比 0.23 / -0.55 / -1.22 / -0.32，连续四年背离；2025 修复至 6.2</td><td><span class="verdict v-warn">🟡 历史红旗已修复</span></td></tr>
+  <tr><td>减值行为</td><td>2023 资产减值 0.66 亿；2024 资产减值 0.48 亿 + 信用减值 0.56 亿（占应收 8.6%）；2025 信用减值回落至 0.03 亿</td><td><span class="verdict v-warn">🟡 2023-24 减值出清</span></td></tr>
+</table>
+<p class="muted">门禁说明：报表勾稽自洽、可以采信；但 2023-2024 连续两年亏损期集中计提了大额资产减值与信用减值（电踏车渠道去库存 + 回款恶化），2025 年"扭亏"建立在出清后的低基数上。后续各层结论均区分"真实经营改善"与"基数效应"。2025 年非经常损益占比 26.4%，触及黄牌线（30% 以下）。</p>
+</div>
+
+<!-- ============ L1 ============ -->
+<h2>L1 · 战略识别与财报匹配 <span class="tag">结论：教科书式总成本领先画像，上市后完成重资产化</span></h2>
+<div class="card">
+<table>
+  <tr><th>画像维度</th><th>博力威特征（2025）</th><th>指向</th></tr>
+  <tr><td>毛利率</td><td>18.1%（历史区间 15%-23%）</td><td>低毛利 → 成本领先型</td></tr>
+  <tr><td>资产周转率（模型口径）</td><td>1.85 次（2024 年 1.18）</td><td>高周转 → 成本领先型</td></tr>
+  <tr><td>销售费用率</td><td>3.0%</td><td>费用克制 → 成本领先型</td></tr>
+  <tr><td>研发费用率</td><td>5.3%（2024 曾达 7.3%）</td><td>成本领先底色上叠加技术投入</td></tr>
+  <tr><td>长期经营资产占比</td><td>71.8%（2021 上市前仅 24.9%）</td><td>IPO 后重资产化（2021/2022 扩张比例 180%/87%）</td></tr>
+  <tr><td>现金周期</td><td><b>-45.3 天</b>（应付 193 天 vs 应收 71 天）</td><td>占用上游资金经营，对供应链议价力强</td></tr>
+</table>
+<p>战略自洽性判定：<span class="verdict v-good">自洽</span>　低毛利 + 高周转 + 低销售费用 + 重资产产能，与消费锂电 PACK 行业"同质化、拼成本与交付"的竞争模式一致。需要警惕的一点：2021 年 IPO 募投扩产曾使周转率从 1.48 稀释到 1.18（2024），产能消化是这家公司过去三年利润承压的结构性原因之一；2025 年周转率回升至 1.85，说明产能利用率修复是本轮反转的核心引擎。</p>
+</div>
+
+<!-- ============ L2 ============ -->
+<h2>L2 · 资产资本表解读 <span class="tag">结论：负营运资本模式 + 净现金，结构稳健；61% 资产负债率是无息占款撑的，不是债务风险</span></h2>
+<div class="card">
+<h3>钱投在哪（2025 资产端，模型口径总额 14.77 亿）</h3>
+<table>
+  <tr><th>构成</th><th>金额 / 占比</th><th>解读</th></tr>
+  <tr><td>长期经营资产</td><td>10.61 亿 / 71.8%</td><td>产能是最大资产，产能利用率决定盈利弹性</td></tr>
+  <tr><td>金融资产</td><td>3.77 亿 / 25.5%</td><td>主要为货币资金；2025 年滚动理财约 6.4 亿进出，规模可控</td></tr>
+  <tr><td>营运资本（净）</td><td><b>-2.58 亿</b>（2021 年为 +4.38 亿）</td><td>营运负债 14.25 亿 &gt; 营运资产 11.68 亿，做生意不占自己的钱</td></tr>
+  <tr><td>商誉 / 净资产</td><td>≈ 0</td><td>无商誉减值风险</td></tr>
+</table>
+<h3>钱从哪来（2025 资本端）</h3>
+<table>
+  <tr><th>指标</th><th>数值</th><th>判定</th></tr>
+  <tr><td>有息负债 / 有息负债率</td><td>2.24 亿 / 15.1%（2022 峰值 5.85 亿 / 29.8%）</td><td><span class="verdict v-good">🟢 低杠杆</span></td></tr>
+  <tr><td>净债务（有息 − 货币资金）</td><td>-1.53 亿</td><td><span class="verdict v-good">🟢 净现金</span></td></tr>
+  <tr><td>资产负债率（报表口径）</td><td>61.2%</td><td><span class="verdict v-warn">🟡 看似高</span> <span class="muted">主体是应付类无息占款，有息仅 2.24 亿——这正是有息负债率比资产负债率更重要的实例</span></td></tr>
+  <tr><td>短期有息占比</td><td>11.6%（2024 曾达 90.6% 🔴）</td><td><span class="verdict v-good">🟢 期限置换完成</span> <span class="muted">2025 新增短期 -3.32 亿 / 新增长期 +1.61 亿</span></td></tr>
+  <tr><td>长期融资净额</td><td>+5.21 亿</td><td><span class="verdict v-good">🟢 无短债长投</span></td></tr>
+  <tr><td>营运资本长期化率</td><td>-0.38（2024 为 -7.98）</td><td><span class="muted">⚪ 指标失真：营运资本为负时分母为负，长期化率不再适用常规判读；实质风险改看"占款模式可持续性"（L5）</span></td></tr>
+</table>
+<p>小结：资产端"产能 + 现金"两块干净，资本端低有息、净现金、期限结构 2025 年明显修复。<b>这家公司没有债务风险，有的是"占款依赖"——其负营运资本模式建立在对上游 193 天应付账期上，这是竞争力，也是脆弱点。</b></p>
+</div>
+
+<!-- ============ L3 ============ -->
+<h2>L3 · 股权价值增加表解读 <span class="tag">结论：主业 2025 年真实转正，但利润纯度打折——35% 靠金融资产收益、26% 靠非经常项</span></h2>
+<div class="card">
+<table>
+  <tr><th>层级</th><th>2024</th><th>2025</th><th>解读</th></tr>
+  <tr><td>营业收入</td><td>18.44（-17.5%）</td><td><b>27.35（+48.3%）</b></td><td>销量贡献 +45.6% + 价格/结构贡献 +11.1%，量价齐升</td></tr>
+  <tr><td>阶段利润1（收入-成本-销售-税金）</td><td>2.23</td><td><b>3.96（历史新高）</b></td><td>产品在市场上的赚钱效应已超 2021 年峰值（3.74）</td></tr>
+  <tr><td>阶段利润2</td><td>-1.15</td><td>0.46</td><td>行政管理费 1.42 亿 + 减值 0.62 亿吃掉大半毛利</td></tr>
+  <tr><td><b>息税前经营利润（主业锚）</b></td><td>-1.32</td><td><b>+0.43</b></td><td>主业真实转正</td></tr>
+  <tr><td>息前税后经营利润</td><td>-0.97</td><td>0.49（占比 65.1%）</td><td>主业贡献</td></tr>
+  <tr><td>息前税后金融资产收益</td><td>0.07</td><td>0.26（占比 <b class="warn">34.9%</b>）</td><td>🟡 理财/投资类收益贡献超过三分之一</td></tr>
+  <tr><td>NOPLAT</td><td>-0.91</td><td>0.76</td><td>—</td></tr>
+  <tr><td>净利润 / 扣非净利润</td><td>-0.97 / -0.84</td><td>0.54 / 0.40</td><td>非经常项占 26.4% 🟡</td></tr>
+</table>
+<p>本层结论句式：2025 年净利润 0.54 亿中，息前税后经营利润 0.49 亿——<b>主业是利润的主要来源（65%），但金融收益贡献 35%、非经常项贡献 26%，账面净利润高估了主业盈利水平；给这家公司定价，应对息前税后经营利润（0.49 亿）而非归母净利润（0.56 亿）。</b>另注意：减值是持续性拖累——2025 年仍计提资产减值 0.59 亿（占长期经营资产 2.9%），存货/产能类资产的减值风险未出清完毕。</p>
+</div>
+
+<!-- ============ L4 ============ -->
+<h2>L4 · ROE 五因素归因 <span class="tag">结论：A 类——主业驱动型修复，杠杆在收缩；但 ROIC 仍跑输债务成本</span></h2>
+<div class="card">
+<table>
+  <tr><th>因子</th><th>2024</th><th>2025</th><th>归因</th></tr>
+  <tr><td>① 息税前经营利润率</td><td>-6.67%</td><td>+2.44%</td><td><b class="good">主驱动：主业盈利修复</b></td></tr>
+  <tr><td>② 资产周转率</td><td>1.18</td><td>1.85</td><td><b class="good">主驱动：产能利用率回升</b></td></tr>
+  <tr><td>③ 财务成本效应</td><td>1.07</td><td>0.72</td><td>利息侵蚀 28% 的 EBIT（债务成本上升，见 L5）</td></tr>
+  <tr><td>④ 财务杠杆倍数</td><td>1.51</td><td>1.31</td><td>杠杆在降 → 排除杠杆驱动</td></tr>
+  <tr><td>⑤ 所得税效应</td><td>0.74</td><td>1.13</td><td>实际税率 -13.2%（亏损递延影响），轻微正贡献，不可持续</td></tr>
+  <tr><td><b>ROE（五因子连乘）</b></td><td>-9.31%</td><td><b>+4.85%</b></td><td>—</td></tr>
+</table>
+<table>
+  <tr><th>配套检验</th><th>结果</th><th>判定</th></tr>
+  <tr><td>净利润增长拆分</td><td>毛利增加 +1.73 亿，贡献率 114.5%（费用/税费/财务贡献均小）</td><td>利润增量几乎全部来自毛利修复，与五因子结论互证</td></tr>
+  <tr><td>杠杆是否创造价值</td><td>核心 ROIC 4.03% <b class="bad">&lt;</b> 税后债务成本 6.39%</td><td><span class="verdict v-bad">🔴 当前加杠杆毁价值</span>　幸好公司在去杠杆</td></tr>
+  <tr><td>ROE vs 股权成本</td><td>4.84% &lt; 10%</td><td>回报率尚未达标 → L6 的 EVA 为负在此得到解释</td></tr>
+</table>
+<p>归因结论：<span class="verdict v-good">A 类 · 主业驱动</span>——ROE 从 -9.2% 修复到 +4.8%，靠的是经营利润率与周转率双升，而非加杠杆或税率红利。这是三种归因类型中质量最高的一种。但注意量级：4.8% 的 ROE 只是"爬出泥坑"，离"优秀"（覆盖 10% 股权成本）还有一倍距离。</p>
+</div>
+
+<!-- ============ L5 ============ -->
+<h2>L5 · 现金流三表验证 <span class="tag">结论：明星型现金流成立，但 2025 年 CFO 高增有占款加深的成分；债务成本在上行</span></h2>
+<div class="card">
+<h3>① 经营现金流 → 利润含金量</h3>
+<table>
+  <tr><th>指标</th><th>2025</th><th>判定</th></tr>
+  <tr><td>经营现金流净额 / 净现比</td><td>3.39 亿 / 6.2</td><td><span class="verdict v-good">🟢 账面利润有超额现金支撑</span></td></tr>
+  <tr><td>销售收现比</td><td>105.5%（2023 年 93.8% 起连续改善）</td><td><span class="verdict v-good">🟢 收入有真实现金回流</span></td></tr>
+  <tr><td>追加营运资本</td><td><b class="warn">-2.70 亿</b></td><td><span class="verdict v-warn">🟡 CFO 高增的重要来源是"多占了上游 2.7 亿"</span>——若 2026 年供应商要求收缩账期，CFO 会回吐</td></tr>
+  <tr><td>现金周期</td><td>-45.3 天（季度口径 2026Q1 一度 -233 天）</td><td>占款模式仍在加深</td></tr>
+</table>
+<h3>② 投资现金流 → 战略落地</h3>
+<p>扩张期确认结束：扩张性资本投资 0.28 亿、扩张比例 2.9%（2021/2022 年为 180%/87%），资本开支回到"维持性"水平；研发效率（Δ收入/前期研发+扩张投入）回升至 4.1，前期投入开始转化为收入。投资方向以产能维护 + 滚动理财为主，无跨界并购——<b>战略聚焦主业，无多元化冲动</b>。</p>
+<h3>③ 筹资现金流 → 资本管理</h3>
+<table>
+  <tr><th>维度</th><th>2025</th><th>判定</th></tr>
+  <tr><td>现金缺口 / 自给率</td><td>投资需求 1.08 亿 &lt; CFO 3.39 亿，自给率 100%</td><td><span class="verdict v-good">🟢 自我造血</span></td></tr>
+  <tr><td>融资行为</td><td>债务筹资净额 -1.33 亿（净还债）；期限置换（短换长）</td><td><span class="verdict v-good">🟢 主动去杠杆</span></td></tr>
+  <tr><td>融资成本</td><td>税前债务成本 5.64%（2023 年 2.95%）；利息率 7.80%</td><td><span class="verdict v-warn">🟡 债务成本连续两年上行</span>——规模虽小，但需跟踪新增贷款的定价</td></tr>
+  <tr><td>偿债安全垫</td><td>利息保障倍数(EBITDA) 8.7 倍；经营现金流/有息负债 151%；净债务/EBITDA -1.0</td><td><span class="verdict v-good">🟢 充足</span>（2023-24 亏损年 EBITDA 无法覆盖利息，已修复）</td></tr>
+</table>
+<p>现金流风格：2024、2025 连续<b>明星型（+--）</b>——自我造血、对外还债，八分类中最健康的类型。2026Q2 单季转为蛮牛型（+-+），对应有息债务余额回升至 3.78 亿（新增短期 +1.06 亿），需观察是季节性备货融资还是重新加杠杆。</p>
+</div>
+
+<!-- ============ L6 ============ -->
+<h2>L6 · 价值评估 <span class="tag">结论：现金流已转正，回报率未达标——"修复确认，价值创造未确认"</span></h2>
+<div class="card">
+<table>
+  <tr><th>价值三问</th><th>2025 证据</th><th>判定</th></tr>
+  <tr><td>投入资本回报够不够？</td><td>ROIC 7.76% / 核心 ROIC 4.03% vs 股权成本 10%</td><td><span class="verdict v-bad">🔴 未覆盖</span>（2020 年曾达 37.6%，当前仅修复途中）</td></tr>
+  <tr><td>股东层面有没有剩余？</td><td>EVA -0.58 亿，连续第三年为负</td><td><span class="verdict v-bad">🔴 会计利润尚未变成股东价值</span></td></tr>
+  <tr><td>自由现金流能否兑现？</td><td>FCFF +4.00 亿 / FCFE +2.44 亿，五年来首次大幅转正</td><td><span class="verdict v-good">🟢 现金维度已成立</span></td></tr>
+</table>
+<p>估值接口判断：①定价基准应为<b>主业利润</b>（息前税后经营利润 0.49 亿）而非归母净利润（0.56 亿，含 35% 金融收益 + 26% 非经常）；②FCFF 转正使 DCF 重新可用，但 2025 年 FCFF 中约 2.7 亿来自营运资本释放（占款加深），常态化 FCFF 应打折看待；③估值溢价的前提是核心 ROIC 回到税后债务成本（6.4%）之上——这是"修复股"变"价值股"的分水岭。</p>
+</div>
+
+<!-- ============ 红旗与跟踪 ============ -->
+<h2>红旗清单与跟踪条件</h2>
+<div class="flag"><b>🔴 红旗 1（最重要）：核心 ROIC（4.0%）&lt; 税后债务成本（6.4%）。</b>主业回报尚不能覆盖借钱成本，此时任何重新加杠杆的动作都在毁价值。跟踪点：2026Q2 有息债务已从 2.24 亿回升至 3.78 亿——若继续攀升而 ROIC 未同步上行，反转逻辑降级。</div>
+<div class="flag"><b>🟠 红旗 2：CFO 的占款成色。</b>2025 年 3.39 亿 CFO 中约 2.7 亿来自对上游占款加深（应付 193 天）。跟踪点：供应商账期是否可持续——若营收增速放缓 + 应付天数被迫收缩同时发生，现金流会快速回吐。</div>
+<div class="flag"><b>🟠 红旗 3：毛利率重新承压。</b>2026Q2 毛利率 16.5%（2025Q2 为 20.3%），当季量贡献 +46.6%、价/结构贡献 -22.4%——增长重新变成"纯走量"。跟踪点：若 2026H2 毛利率不能回到 18% 以上，"量价齐升"叙事降级为"以价换量"。</div>
+<div class="flag"><b>🟡 红旗 4：利润纯度。</b>金融收益占 NOPLAT 35%、非经常项占净利润 26%、减值仍在持续（2025 计提 0.59 亿）。跟踪点：2026 年报中息前税后经营利润能否独立超过 1 亿（2025 为 0.49 亿）。</div>
+<div class="card">
+<h3>条件化判断框架（非操作建议）</h3>
+<ul class="tight">
+  <li>若 2026 年报同时满足【核心 ROIC &gt; 6.4% 且 扣非净利率 &gt; 3% 且 有息负债率 &lt; 20%】→ 反转升级为价值创造，可按成长股逻辑研究；</li>
+  <li>若【毛利率跌破 15% 或 应付账期被迫收缩导致 CFO 转负】→ 占款模式反噬，反转证伪；</li>
+  <li>中间状态（当前）→ 按"困境反转观察期"对待，关键验证窗口是 2026 年报的 ROIC 与 CFO 质量。</li>
+</ul>
+</div>
+
+<footer>
+  <p><b>口径说明</b>：全部指标由 finmodel 引擎基于 akshare/东方财富公开报表数据计算（2025 年报 + 2026 中报），模型口径与 Wind《财务分析模型（季度）》一致；股权资金成本率假设 10%；购货付现比分母含 17% 增值税假设；公司业务描述据公开资料，细节需以年报为准。解读框架见《公司财务解读分析框架_融合版 v1.1》。</p>
+  <p style="margin-top:8px"><b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。</p>
+</footer>
+</div>
+</body>
+</html>
